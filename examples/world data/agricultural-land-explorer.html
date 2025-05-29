@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agricultural Land Data Explorer</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .data-info {
+            background: #e8f4fd;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: inline-block;
+            color: #2980b9;
+            font-weight: 500;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.9rem;
+        }
+
+        input, select {
+            padding: 12px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+        }
+
+        .data-table {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e1e8ed;
+            transition: background-color 0.2s ease;
+        }
+
+        .country-row {
+            cursor: pointer;
+        }
+
+        .country-row:hover {
+            background-color: #f8f9fa;
+        }
+
+        .country-row.selected {
+            background-color: #e3f2fd;
+            border-left: 4px solid #667eea;
+        }
+
+        .trend-icon {
+            font-size: 1.2rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+        }
+
+        .error {
+            background: #fee;
+            color: #c33;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .controls {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌾 Agricultural Land Explorer</h1>
+            <p class="subtitle">World Development Indicators - Agricultural land (% of land area)</p>
+            <div class="data-info" id="dataInfo">Loading data...</div>
+        </div>
+
+        <div id="loadingMessage" class="loading">
+            <h3>📊 Loading agricultural data...</h3>
+            <p>Please wait while we fetch the latest information</p>
+        </div>
+
+        <div id="errorMessage" class="error" style="display: none;">
+            <h3>❌ Error loading data</h3>
+            <p>Please check that the JSON file is available and try again.</p>
+        </div>
+
+        <div id="mainContent" style="display: none;">
+            <div class="controls">
+                <div class="control-group">
+                    <label for="countrySearch">🔍 Search Countries</label>
+                    <input type="text" id="countrySearch" placeholder="Type country name...">
+                </div>
+                
+                <div class="control-group">
+                    <label for="yearFilter">📅 Year Range</label>
+                    <select id="yearFilter">
+                        <option value="all">All Available Years</option>
+                        <option value="recent">Recent Years (2020-2023)</option>
+                        <option value="2023">2023 Only</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label for="sortBy">📊 Sort By</label>
+                    <select id="sortBy">
+                        <option value="name">Country Name</option>
+                        <option value="latest">Latest Value</option>
+                        <option value="average">Average Value</option>
+                        <option value="trend">Data Trend</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalCountries">0</div>
+                    <div class="stat-label">Countries with Data</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="avgValue">0%</div>
+                    <div class="stat-label">Average (Latest Year)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="highestCountry">-</div>
+                    <div class="stat-label">Highest %</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="lowestCountry">-</div>
+                    <div class="stat-label">Lowest %</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3 style="margin-bottom: 20px; color: #2c3e50;">📈 Agricultural Land Trends</h3>
+                <div class="chart-wrapper">
+                    <canvas id="trendsChart"></canvas>
+                </div>
+                <p style="text-align: center; color: #666; margin-top: 10px; font-size: 0.9rem;">
+                    Click on countries in the table below to add/remove them from the chart
+                </p>
+            </div>
+
+            <div class="data-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>🌍 Country</th>
+                            <th>📅 Years Available</th>
+                            <th>📊 Latest Value (%)</th>
+                            <th>📈 Average (%)</th>
+                            <th>📉 Trend</th>
+                        </tr>
+                    </thead>
+                    <tbody id="countryTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let agriculturalData = null;
+        let chart = null;
+        let selectedCountries = new Set();
+
+        // Load and parse the JSON data
+        async function loadData() {
+            try {
+                const response = await fetch('./agricultural-land-data.json');
+                if (!response.ok) throw new Error('Failed to load data');
+                
+                agriculturalData = await response.json();
+                document.getElementById('loadingMessage').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+                
+                updateDataInfo();
+                calculateStats();
+                renderTable();
+                initializeChart();
+                
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('loadingMessage').style.display = 'none';
+                document.getElementById('errorMessage').style.display = 'block';
+            }
+        }
+
+        function updateDataInfo() {
+            const { metadata } = agriculturalData;
+            document.getElementById('dataInfo').innerHTML = 
+                `📅 ${metadata.yearRange.start}-${metadata.yearRange.end} | 
+                 📊 ${metadata.dataSource} | 
+                 🔄 Updated: ${metadata.lastUpdated}`;
+        }
+
+        function calculateStats() {
+            const countries = agriculturalData.countries;
+            const latestValues = [];
+            
+            countries.forEach(country => {
+                const years = Object.keys(country.data).sort((a, b) => b - a);
+                if (years.length > 0) {
+                    latestValues.push({
+                        name: country.name,
+                        value: country.data[years[0]],
+                        year: years[0]
+                    });
+                }
+            });
+
+            document.getElementById('totalCountries').textContent = countries.length;
+            
+            if (latestValues.length > 0) {
+                const avg = latestValues.reduce((sum, item) => sum + item.value, 0) / latestValues.length;
+                document.getElementById('avgValue').textContent = avg.toFixed(1) + '%';
+                
+                const highest = latestValues.reduce((max, item) => item.value > max.value ? item : max);
+                const lowest = latestValues.reduce((min, item) => item.value < min.value ? item : min);
+                
+                document.getElementById('highestCountry').innerHTML = 
+                    `${highest.name}<br><small>${highest.value.toFixed(1)}%</small>`;
+                document.getElementById('lowestCountry').innerHTML = 
+                    `${lowest.name}<br><small>${lowest.value.toFixed(1)}%</small>`;
+            }
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('countryTableBody');
+            const searchTerm = document.getElementById('countrySearch').value.toLowerCase();
+            const sortBy = document.getElementById('sortBy').value;
+            
+            let filteredCountries = agriculturalData.countries.filter(country => 
+                country.name.toLowerCase().includes(searchTerm)
+            );
+
+            // Sort countries
+            filteredCountries.sort((a, b) => {
+                switch(sortBy) {
+                    case 'name':
+                        return a.name.localeCompare(b.name);
+                    case 'latest':
+                        return getLatestValue(b) - getLatestValue(a);
+                    case 'average':
+                        return getAverageValue(b) - getAverageValue(a);
+                    case 'trend':
+                        return getTrendValue(b) - getTrendValue(a);
+                    default:
+                        return 0;
+                }
+            });
+
+            tbody.innerHTML = '';
+            
+            filteredCountries.forEach(country => {
+                const row = document.createElement('tr');
+                row.className = 'country-row';
+                if (selectedCountries.has(country.name)) {
+                    row.classList.add('selected');
+                }
+
+                const years = Object.keys(country.data);
+                const latestValue = getLatestValue(country);
+                const avgValue = getAverageValue(country);
+                const trend = getTrendDirection(country);
+
+                row.innerHTML = `
+                    <td><strong>${country.name}</strong> <small>(${country.code})</small></td>
+                    <td>${years.length > 0 ? `${Math.min(...years)} - ${Math.max(...years)}` : 'No data'}</td>
+                    <td>${latestValue ? latestValue.toFixed(1) + '%' : 'N/A'}</td>
+                    <td>${avgValue ? avgValue.toFixed(1) + '%' : 'N/A'}</td>
+                    <td><span class="trend-icon">${trend}</span></td>
+                `;
+
+                row.addEventListener('click', () => toggleCountry(country, row));
+                tbody.appendChild(row);
+            });
+        }
+
+        function getLatestValue(country) {
+            const years = Object.keys(country.data).sort((a, b) => b - a);
+            return years.length > 0 ? country.data[years[0]] : null;
+        }
+
+        function getAverageValue(country) {
+            const values = Object.values(country.data);
+            return values.length > 0 ? values.reduce((sum, val) => sum + val, 0) / values.length : null;
+        }
+
+        function getTrendValue(country) {
+            const years = Object.keys(country.data).sort();
+            if (years.length < 2) return 0;
+            return country.data[years[years.length - 1]] - country.data[years[0]];
+        }
+
+        function getTrendDirection(country) {
+            const trendValue = getTrendValue(country);
+            if (Math.abs(trendValue) < 0.5) return '➡️';
+            return trendValue > 0 ? '📈' : '📉';
+        }
+
+        function toggleCountry(country, row) {
+            if (selectedCountries.has(country.name)) {
+                selectedCountries.delete(country.name);
+                row.classList.remove('selected');
+            } else {
+                selectedCountries.add(country.name);
+                row.classList.add('selected');
+            }
+            updateChart();
+        }
+
+        function initializeChart() {
+            // Auto-select a few interesting countries
+            const interestingCountries = ['Afghanistan', 'China', 'Brazil', 'United States'];
+            interestingCountries.forEach(name => {
+                const country = agriculturalData.countries.find(c => c.name === name);
+                if (country) selectedCountries.add(name);
+            });
+            
+            updateChart();
+            renderTable(); // Refresh to show selected countries
+        }
+
+        function updateChart() {
+            const ctx = document.getElementById('trendsChart').getContext('2d');
+            
+            if (chart) {
+                chart.destroy();
+            }
+
+            const datasets = [];
+            const colors = [
+                '#667eea', '#764ba2', '#f093fb', '#f5576c', 
+                '#4facfe', '#00f2fe', '#a8edea', '#fed6e3'
+            ];
+            
+            let colorIndex = 0;
+            
+            selectedCountries.forEach(countryName => {
+                const country = agriculturalData.countries.find(c => c.name === countryName);
+                if (!country) return;
+
+                const years = Object.keys(country.data).sort();
+                const data = years.map(year => ({
+                    x: year,
+                    y: country.data[year]
+                }));
+
+                datasets.push({
+                    label: country.name,
+                    data: data,
+                    borderColor: colors[colorIndex % colors.length],
+                    backgroundColor: colors[colorIndex % colors.length] + '20',
+                    borderWidth: 3,
+                    fill: false,
+                    tension: 0.4,
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                });
+                colorIndex++;
+            });
+
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: { datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 20
+                            }
+                        },
+                        tooltip: {
+                            mode: 'nearest',
+                            intersect: false,
+                            backgroundColor: 'rgba(0,0,0,0.8)',
+                            titleColor: 'white',
+                            bodyColor: 'white',
+                            borderColor: '#667eea',
+                            borderWidth: 1
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Year',
+                                font: { size: 14, weight: 'bold' }
+                            },
+                            grid: {
+                                color: 'rgba(0,0,0,0.1)'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Agricultural Land (%)',
+                                font: { size: 14, weight: 'bold' }
+                            },
+                            grid: {
+                                color: 'rgba(0,0,0,0.1)'
+                            }
+                        }
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'index'
+                    }
+                }
+            });
+        }
+
+        // Event listeners
+        document.getElementById('countrySearch').addEventListener('input', renderTable);
+        document.getElementById('sortBy').addEventListener('change', renderTable);
+        document.getElementById('yearFilter').addEventListener('change', renderTable);
+
+        // Initialize the application
+        loadData();
+    </script>
+</body>
+</html>

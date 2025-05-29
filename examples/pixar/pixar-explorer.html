@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixar Data Explorer</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 50%, #45b7d1 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 5px;
+        }
+
+        .tab {
+            padding: 15px 30px;
+            background: transparent;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .movie-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff6b6b;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .movie-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .movie-info {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .movie-characters {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .characters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .character-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #4ecdc4;
+        }
+
+        .character-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+        }
+
+        .timeline {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .timeline-year {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-right: 20px;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .search-box {
+            background: white;
+            border: 2px solid #e1e8ed;
+            border-radius: 25px;
+            padding: 15px 20px;
+            font-size: 1rem;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto 30px;
+            display: block;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #4ecdc4;
+            box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎬 Pixar Data Explorer</h1>
+            <p class="subtitle">Explore the magic of Pixar through data</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('overview')">📊 Overview</button>
+            <button class="tab" onclick="showTab('movies')">🎥 Movies</button>
+            <button class="tab" onclick="showTab('characters')">👾 Characters</button>
+            <button class="tab" onclick="showTab('timeline')">📅 Timeline</button>
+        </div>
+
+        <div id="overview" class="tab-content active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalMovies">5</div>
+                    <div class="stat-label">Movies Released</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalRevenue">$2.6B</div>
+                    <div class="stat-label">Total Worldwide Revenue</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="avgRevenue">$528M</div>
+                    <div class="stat-label">Average Per Movie</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalAwards">13</div>
+                    <div class="stat-label">Major Awards Won</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3 style="margin-bottom: 20px; color: #2c3e50;">💰 Box Office Performance</h3>
+                <div class="chart-wrapper">
+                    <canvas id="boxOfficeChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3 style="margin-bottom: 20px; color: #2c3e50;">🏆 Awards Distribution</h3>
+                <div class="chart-wrapper">
+                    <canvas id="awardsChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div id="movies" class="tab-content">
+            <input type="text" class="search-box" id="movieSearch" placeholder="🔍 Search movies...">
+            <div class="movies-grid" id="moviesGrid">
+            </div>
+        </div>
+
+        <div id="characters" class="tab-content">
+            <input type="text" class="search-box" id="characterSearch" placeholder="🔍 Search characters...">
+            <div class="characters-grid" id="charactersGrid">
+            </div>
+        </div>
+
+        <div id="timeline" class="tab-content">
+            <div class="timeline" id="timelineContainer">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let pixarData = null;
+
+        // Load the JSON data
+        async function loadData() {
+            try {
+                const response = await fetch('./combined-data.json');
+                pixarData = await response.json();
+                initializeApp();
+            } catch (error) {
+                console.error('Error loading data:', error);
+                // Fallback data if JSON file not found
+                pixarData = {
+                    "movies": [
+                        {
+                            "title": "Toy Story",
+                            "year": 1995,
+                            "director": "John Lasseter",
+                            "runtime": 81,
+                            "boxOffice": {"domestic": 191796233, "worldwide": 373554033},
+                            "awards": ["Academy Special Achievement Award"],
+                            "mainCharacters": ["Woody", "Buzz Lightyear", "Andy"]
+                        }
+                        // ... more fallback data
+                    ],
+                    "characters": [
+                        {
+                            "name": "Woody",
+                            "movie": "Toy Story",
+                            "type": "Cowboy Toy",
+                            "voiceActor": "Tom Hanks",
+                            "description": "Andy's favorite toy and leader of the toys"
+                        }
+                        // ... more fallback data
+                    ],
+                    "boxOfficeStats": {
+                        "totalWorldwide": 2641896737,
+                        "averagePerMovie": 528379347
+                    },
+                    "timeline": [
+                        {"year": 1995, "event": "Toy Story released - first fully computer-animated feature film"}
+                    ]
+                };
+                initializeApp();
+            }
+        }
+
+        function initializeApp() {
+            updateStats();
+            renderMovies();
+            renderCharacters();
+            renderTimeline();
+            createCharts();
+        }
+
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function updateStats() {
+            if (!pixarData) return;
+
+            const totalRevenue = pixarData.boxOfficeStats?.totalWorldwide || 0;
+            const avgRevenue = pixarData.boxOfficeStats?.averagePerMovie || 0;
+            const totalAwards = (pixarData.awards?.academyAwards?.wins || 0) + 
+                              (pixarData.awards?.goldenGlobes?.wins || 0) + 
+                              (pixarData.awards?.annieAwards?.wins || 0);
+
+            document.getElementById('totalMovies').textContent = pixarData.movies?.length || 0;
+            document.getElementById('totalRevenue').textContent = `$${(totalRevenue / 1000000000).toFixed(1)}B`;
+            document.getElementById('avgRevenue').textContent = `$${(avgRevenue / 1000000).toFixed(0)}M`;
+            document.getElementById('totalAwards').textContent = totalAwards;
+        }
+
+        function renderMovies() {
+            const grid = document.getElementById('moviesGrid');
+            const searchBox = document.getElementById('movieSearch');
+            
+            function displayMovies(movies = pixarData.movies) {
+                grid.innerHTML = '';
+                
+                movies.forEach(movie => {
+                    const card = document.createElement('div');
+                    card.className = 'movie-card';
+                    card.innerHTML = `
+                        <div class="movie-title">${movie.title}</div>
+                        <div class="movie-info">
+                            <strong>Year:</strong> ${movie.year}<br>
+                            <strong>Director:</strong> ${movie.director}<br>
+                            <strong>Runtime:</strong> ${movie.runtime} minutes
+                        </div>
+                        <div class="movie-characters">
+                            <strong>Main Characters:</strong><br>
+                            ${movie.mainCharacters.join(', ')}
+                        </div>
+                        <div>
+                            <strong>Worldwide Box Office:</strong> $${(movie.boxOffice.worldwide / 1000000).toFixed(0)}M<br>
+                            <strong>Awards:</strong> ${movie.awards.length} major awards
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+
+            searchBox.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredMovies = pixarData.movies.filter(movie => 
+                    movie.title.toLowerCase().includes(searchTerm) ||
+                    movie.director.toLowerCase().includes(searchTerm)
+                );
+                displayMovies(filteredMovies);
+            });
+
+            displayMovies();
+        }
+
+        function renderCharacters() {
+            const grid = document.getElementById('charactersGrid');
+            const searchBox = document.getElementById('characterSearch');
+            
+            function displayCharacters(characters = pixarData.characters) {
+                grid.innerHTML = '';
+                
+                characters.forEach(character => {
+                    const card = document.createElement('div');
+                    card.className = 'character-card';
+                    card.innerHTML = `
+                        <div class="character-name">${character.name}</div>
+                        <div><strong>Movie:</strong> ${character.movie}</div>
+                        <div><strong>Type:</strong> ${character.type}</div>
+                        <div><strong>Voice Actor:</strong> ${character.voiceActor}</div>
+                        <div style="margin-top: 10px; color: #666;">${character.description}</div>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+
+            searchBox.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredCharacters = pixarData.characters.filter(character => 
+                    character.name.toLowerCase().includes(searchTerm) ||
+                    character.movie.toLowerCase().includes(searchTerm) ||
+                    character.voiceActor.toLowerCase().includes(searchTerm)
+                );
+                displayCharacters(filteredCharacters);
+            });
+
+            displayCharacters();
+        }
+
+        function renderTimeline() {
+            const container = document.getElementById('timelineContainer');
+            container.innerHTML = '<h3 style="margin-bottom: 20px; color: #2c3e50;">🎬 Pixar Timeline</h3>';
+            
+            pixarData.timeline.forEach(item => {
+                const timelineItem = document.createElement('div');
+                timelineItem.className = 'timeline-item';
+                timelineItem.innerHTML = `
+                    <div class="timeline-year">${item.year}</div>
+                    <div>${item.event}</div>
+                `;
+                container.appendChild(timelineItem);
+            });
+        }
+
+        function createCharts() {
+            createBoxOfficeChart();
+            createAwardsChart();
+        }
+
+        function createBoxOfficeChart() {
+            const ctx = document.getElementById('boxOfficeChart').getContext('2d');
+            
+            const data = pixarData.movies.map(movie => ({
+                x: movie.year,
+                y: movie.boxOffice.worldwide / 1000000 // Convert to millions
+            }));
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    datasets: [{
+                        label: 'Worldwide Box Office (Millions)',
+                        data: data,
+                        backgroundColor: 'rgba(255, 107, 107, 0.8)',
+                        borderColor: 'rgba(255, 107, 107, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Year'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Revenue (Millions USD)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createAwardsChart() {
+            const ctx = document.getElementById('awardsChart').getContext('2d');
+            
+            const awards = pixarData.awards;
+            
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Academy Awards', 'Golden Globes', 'Annie Awards'],
+                    datasets: [{
+                        data: [
+                            awards.academyAwards.wins,
+                            awards.goldenGlobes.wins,
+                            awards.annieAwards.wins
+                        ],
+                        backgroundColor: [
+                            '#ff6b6b',
+                            '#4ecdc4',
+                            '#45b7d1'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize the app
+        loadData();
+    </script>
+</body>
+</html>
