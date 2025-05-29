@@ -11,10 +11,13 @@ Getting started with AI assisted coding
 ## Today's agenda
 - Where we are 
 - Some high level terms
-- Single page app
-- More complex application        
+- Introducing Windsurf
+- Single page demo
+- Practice       
 
 ---
+
+<br />
 
 ## How much time do developers spend coding?
 
@@ -41,7 +44,11 @@ https://www.microsoft.com/en-us/research/wp-content/uploads/2019/04/devtime-prep
 
 ---
 
-## Where we are 
+<br />
+
+<br />
+
+# Where we are 
 - 12 months ago vs now
 - Where will we be in 12 months?       
 
@@ -68,7 +75,12 @@ https://ghuntley.com/dothings/
 
 ---
 
-## High level terms
+<br />
+
+
+<br />
+
+# High level terms
 - coding at high level of abstraction, understand at a high level of abstraction
 
 ---
@@ -127,6 +139,8 @@ Others?
 - Postman
 - Slack
 - Workflow automation
+
+<br />
 
 
 ## IDEs that bring all three together

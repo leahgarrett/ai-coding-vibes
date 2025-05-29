@@ -1,10 +1,10 @@
 # AI Coding Vibes
 
-A collection of examples and resources for AI-assisted coding, demonstrating how AI can enhance developer productivity and efficiency.
+A workshop for AI-assisted coding, demonstrating how AI can enhance developer productivity and efficiency.
 
 ## Overview
 
-This project showcases various examples of AI-assisted coding, including practical implementations and demonstrations of how AI tools can help with different aspects of software development.
+This project contains the slides and a couple started examples for the workshop "Using AI tools for coding".
 
 ## Contents
 
