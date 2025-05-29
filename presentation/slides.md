@@ -1,9 +1,9 @@
-# Title Slide
+# Using AI tools for coding
 
 ---
 
 ## Today's objective
-Get started with AI assisted coding
+Getting started with AI assisted coding
         
 
 ---
@@ -16,7 +16,7 @@ Get started with AI assisted coding
 
 ---
 
-## How much time do developers spend coding
+## How much time do developers spend coding?
 
 About 10%  
 https://drpicox.medium.com/developers-spend-less-than-10-of-time-coding-51c36c73a93b
@@ -95,6 +95,13 @@ Model versions specialise for different use cases.
 
 ## Context
 
+In an AI-assisted coding IDE, context refers to the comprehensive understanding of the project, codebase, and environment that the AI uses to provide relevant and accurate assistance. This includes:
+- Codebase Awareness  
+- Project Scope  
+- Current Task  
+- History  
+- Environment Settings  
+- External Inputs
 
 ---
 
