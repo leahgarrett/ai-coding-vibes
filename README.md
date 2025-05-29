@@ -10,8 +10,8 @@ This project showcases various examples of AI-assisted coding, including practic
 
 - **Presentation**: A slide deck introducing AI-assisted coding concepts and best practices
 - **Examples**: Practical code examples demonstrating AI-assisted development
-  - `pixar/`: Example project using AI for image processing
-  - `world data/`: Example project working with global datasets
+  - `pixar/`: Example starter project using AI for image processing
+  - `world data/`: Example project working with global data
 
 ## Getting Started
 
