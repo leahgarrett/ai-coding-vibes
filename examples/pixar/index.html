@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixar Movies Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Pixar Movies Dashboard</h1>
+            <p>Explore the magical world of Pixar through data visualization</p>
+        </header>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label for="genre-filter">Filter by Genre:</label>
+                <select id="genre-filter">
+                    <option value="">All Genres</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="year-filter">Filter by Year:</label>
+                <select id="year-filter">
+                    <option value="">All Years</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="rating-filter">Filter by Rating:</label>
+                <select id="rating-filter">
+                    <option value="">All Ratings</option>
+                    <option value="G">G</option>
+                    <option value="PG">PG</option>
+                    <option value="PG-13">PG-13</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <div class="stats-container">
+                <div class="stat-card">
+                    <h3>Total Movies</h3>
+                    <p id="total-movies">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Revenue</h3>
+                    <p id="total-revenue">$0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Average Runtime</h3>
+                    <p id="avg-runtime">0 min</p>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h2>Box Office Performance</h2>
+                <canvas id="revenue-chart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <h2>Movies by Rating</h2>
+                <canvas id="rating-chart"></canvas>
+            </div>
+
+            <div class="movies-grid" id="movies-container">
+                <!-- Movies will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+
+    <script src="app.js"></script>
+</body>
+</html>

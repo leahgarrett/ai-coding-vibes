@@ -1,0 +1,702 @@
+[
+  {
+    "number": "1",
+    "film": "Toy Story",
+    "release_date": "1995-11-22",
+    "run_time": "81",
+    "film_rating": "G",
+    "plot": "A cowboy doll is profoundly threatened and jealous when a new spaceman action figure supplants him as top toy in a boy's bedroom.",
+    "genres": [
+      "Adventure",
+      "Animation",
+      "Comedy"
+    ],
+    "box_office": {
+      "film": "Toy Story",
+      "budget": "30000000",
+      "box_office_us_canada": "223225679",
+      "box_office_other": "171210907",
+      "box_office_worldwide": "394436586"
+    },
+    "academy_awards": {
+      "film": "Toy Story",
+      "award_type": "Other",
+      "status": "Won Special Achievement"
+    }
+  },
+  {
+    "number": "2",
+    "film": "A Bug's Life",
+    "release_date": "1998-11-25",
+    "run_time": "95",
+    "film_rating": "G",
+    "plot": "A misfit ant, looking for \"warriors\" to save his colony from greedy grasshoppers, recruits a group of bugs that turn out to be an inept circus troupe.",
+    "genres": [
+      "Adventure",
+      "Animation",
+      "Comedy"
+    ],
+    "box_office": {
+      "film": "A Bug's Life",
+      "budget": "120000000",
+      "box_office_us_canada": "162798565",
+      "box_office_other": "200460294",
+      "box_office_worldwide": "363258859"
+    },
+    "academy_awards": {
+      "film": "A Bug's Life",
+      "award_type": "Original Score",
+      "status": "Nominated"
+    }
+  },
+  {
+    "number": "3",
+    "film": "Toy Story 2",
+    "release_date": "1999-11-24",
+    "run_time": "92",
+    "film_rating": "G",
+    "plot": "When Woody is stolen by a toy collector, Buzz and his friends set out on a rescue mission to save Woody before he becomes a museum toy property with his roundup gang Jessie, Prospector, and Bullseye.",
+    "genres": [
+      "Adventure",
+      "Animation",
+      "Comedy"
+    ],
+    "box_office": {
+      "film": "Toy Story 2",
+      "budget": "90000000",
+      "box_office_us_canada": "245852179",
+      "box_office_other": "265506097",
+      "box_office_worldwide": "511358276"
+    },
+    "academy_awards": {
+      "film": "Toy Story 2",
+      "award_type": "Original Song",
+      "status": "Nominated"
+    }
+  },
+  {
+    "number": "4",
+    "film": "Monsters, Inc.",
+    "release_date": "2001-11-02",
+    "run_time": "92",
+    "film_rating": "G",
+    "plot": "In order to power the city, monsters have to scare children so that they scream. However, the children are toxic to the monsters, and after a child gets through, two monsters realize things may not be what they think.",
+    "genres": [
+      "Adventure",
+      "Animation",
+      "Comedy"
+    ],
+    "box_office": {
+      "film": "Monsters, Inc.",
+      "budget": "115000000",
+      "box_office_us_canada": "255873250",
+      "box_office_other": "272900000",
+      "box_office_worldwide": "528773250"
+    },
+    "academy_awards": {
+      "film": "Monsters, Inc.",
+      "award_type": "Sound Editing",
+      "status": "Nominated"
+    }
+  },
+  {
+    "number": "5",
+    "film": "Finding Nemo",
+    "release_date": "2003-05-30",
+    "run_time": "100",
+    "film_rating": "G",
+    "plot": "After his son is captured in the Great Barrier Reef and taken to Sydney, a timid clownfish sets out on a journey to bring him home.",
+    "genres": [
+      "Adventure",
+      "Animation",
+      "Comedy"
+    ],
+    "box_office": {
+      "film": "Finding Nemo",
+      "budget": "94000000",
+      "box_office_us_canada": "339714978",
+      "box_office_other": "531300000",
+      "box_office_worldwide": "871014978"
+    },
+    "academy_awards": {
+      "film": "Finding Nemo",
+      "award_type": "Sound Editing",
+      "status": "Nominated"
+    }
+  },
+  {
+    "number": "6",
+    "film": "The Incredibles",
+    "release_date": "2004-11-05",
+    "run_time": "115",
+    "film_rating": "PG",
+    "plot": "While trying to lead a quiet suburban life, a family of undercover superheroes are forced into action to save the world.",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Animation"
+    ],
+    "box_office": {
+      "film": "The Incredibles",
+      "budget": "92000000",
+      "box_office_us_canada": "261441092",
+      "box_office_other": "370001000",
+      "box_office_worldwide": "631442092"
+    },
+    "academy_awards": {
+      "film": "The Incredibles",
+      "award_type": "Sound Mixing",
+      "status": "Nominated"
+    }
+  },
+  {
+    "number": "7",
+    "film": "Cars",
+    "release_date": "2006-06-09",
+    "run_time": "116",
+    "film_rating": "G",
+    "plot": "On the way to the biggest race of his life, a hotshot rookie race car gets stranded in a rundown town and learns that winning isn't everything in life.",
+    "genres": [
+      "Adventure",
+      "Animation",
+      "Comedy"
+    ],
+    "box_office": {
+      "film": "Cars",
+      "budget": "120000000",
+      "box_office_us_canada": "244082982",
+      "box_office_other": "217900167",
+      "box_office_worldwide": "461983149"
+    },
+    "academy_awards": {
+      "film": "Cars",
+      "award_type": "Original Song",
+      "status": "Nominated"
+    }
+  },
+  {
+    "number": "8",
+    "film": "Ratatouille",
+    "release_date": "2007-06-29",
+    "run_time": "111",
+    "film_rating": "G",
+    "plot": "A rat who can cook makes an unusual alliance with a young kitchen worker at a famous Paris restaurant.",
+    "genres": [
+      "Adventure",
+      "Animation",
+      "Comedy"
+    ],
+    "box_office": {
+      "film": "Ratatouille",
+      "budget": "150000000",
+      "box_office_us_canada": "206445654",
+      "box_office_other": "417280431",
+      "box_office_worldwide": "623726085"
+    },
+    "academy_awards": {
+      "film": "Ratatouille",
+      "award_type": "Sound Mixing",
+      "status": "Nominated"
+    }
+  },
+  {
+    "number": "9",
+    "film": "WALL-E",
+    "release_date": "2008-06-27",
+    "run_time": "98",
+    "film_rating": "G",
+    "plot": "A robot who is responsible for cleaning a waste-covered Earth meets another robot and falls in love with her. Together, they set out on a journey that will alter the fate of mankind.",
+    "genres": [
+      "Adventure",
+      "Animation",
+      "Family"
+    ],
+    "box_office": {
+      "film": "WALL-E",
+      "budget": "180000000",
+      "box_office_us_canada": "223808164",
+      "box_office_other": "297503696",
+      "box_office_worldwide": "521311860"
+    },
+    "academy_awards": {
+      "film": "WALL-E",
+      "award_type": "Sound Mixing",
+      "status": "Nominated"
+    }
+  },
+  {
+    "number": "10",
+    "film": "Up",
+    "release_date": "2009-05-29",
+    "run_time": "96",
+    "film_rating": "PG",
+    "plot": "78-year-old Carl Fredricksen travels to South America in his house equipped with balloons, inadvertently taking a young stowaway.",
+    "genres": [
+      "Adventure",
+      "Animation",
+      "Comedy"
+    ],
+    "box_office": {
+      "film": "Up",
+      "budget": "175000000",
+      "box_office_us_canada": "293004164",
+      "box_office_other": "442094918",
+      "box_office_worldwide": "735099082"
+    },
+    "academy_awards": {
+      "film": "Up",
+      "award_type": "Sound Editing",
+      "status": "Nominated"
+    }
+  },
+  {
+    "number": "11",
+    "film": "Toy Story 3",
+    "release_date": "2010-06-18",
+    "run_time": "103",
+    "film_rating": "G",
+    "plot": "The toys are mistakenly delivered to a day-care center instead of the attic right before Andy leaves for college, and it's up to Woody to convince the other toys that they weren't abandoned and to return home.",
+    "genres": [
+      "Adventure",
+      "Animation",
+      "Comedy"
+    ],
+    "box_office": {
+      "film": "Toy Story 3",
+      "budget": "200000000",
+      "box_office_us_canada": "415004880",
+      "box_office_other": "651964823",
+      "box_office_worldwide": "1066969703"
+    },
+    "academy_awards": {
+      "film": "Toy Story 3",
+      "award_type": "Sound Editing",
+      "status": "Nominated"
+    }
+  },
+  {
+    "number": "12",
+    "film": "Cars 2",
+    "release_date": "2011-06-24",
+    "run_time": "106",
+    "film_rating": "G",
+    "plot": "Star race car Lightning McQueen and his pal Mater head overseas to compete in the World Grand Prix race. But the road to the championship becomes rocky as Mater gets caught up in an intriguing adventure of his own: international e...",
+    "genres": [
+      "Adventure",
+      "Animation",
+      "Comedy"
+    ],
+    "box_office": {
+      "film": "Cars 2",
+      "budget": "200000000",
+      "box_office_us_canada": "191452396",
+      "box_office_other": "368400000",
+      "box_office_worldwide": "559852396"
+    },
+    "academy_awards": {
+      "film": "Cars 2",
+      "award_type": "Original Screenplay",
+      "status": "Ineligible"
+    }
+  },
+  {
+    "number": "13",
+    "film": "Brave",
+    "release_date": "2012-06-22",
+    "run_time": "93",
+    "film_rating": "PG",
+    "plot": "Determined to make her own path in life, Princess Merida defies a custom that brings chaos to her kingdom. Granted one wish, Merida must rely on her bravery and her archery skills to undo a beastly curse.",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Animation"
+    ],
+    "box_office": {
+      "film": "Brave",
+      "budget": "185000000",
+      "box_office_us_canada": "237283207",
+      "box_office_other": "301700000",
+      "box_office_worldwide": "538983207"
+    },
+    "academy_awards": {
+      "film": "Brave",
+      "award_type": "Adapted Screenplay",
+      "status": "Ineligible"
+    }
+  },
+  {
+    "number": "14",
+    "film": "Monsters University",
+    "release_date": "2013-06-21",
+    "run_time": "104",
+    "film_rating": "G",
+    "plot": "A look at the relationship between Mike Wazowski and James P. \"Sully\" Sullivan during their days at Monsters University, when they weren't necessarily the best of friends.",
+    "genres": [
+      "Adventure",
+      "Animation",
+      "Comedy"
+    ],
+    "box_office": {
+      "film": "Monsters University",
+      "budget": "200000000",
+      "box_office_us_canada": "268492764",
+      "box_office_other": "475066843",
+      "box_office_worldwide": "743559607"
+    },
+    "academy_awards": {
+      "film": "Monsters University",
+      "award_type": "Original Screenplay",
+      "status": "Ineligible"
+    }
+  },
+  {
+    "number": "15",
+    "film": "Inside Out",
+    "release_date": "2015-06-19",
+    "run_time": "95",
+    "film_rating": "PG",
+    "plot": "After young Riley is uprooted from her Midwest life and moved to San Francisco, her emotions - Joy, Fear, Anger, Disgust and Sadness - conflict on how best to navigate a new city, house, and school.",
+    "genres": [
+      "Adventure",
+      "Animation",
+      "Comedy"
+    ],
+    "box_office": {
+      "film": "Inside Out",
+      "budget": "175000000",
+      "box_office_us_canada": "356461711",
+      "box_office_other": "501149463",
+      "box_office_worldwide": "857611174"
+    },
+    "academy_awards": {
+      "film": "Inside Out",
+      "award_type": "Adapted Screenplay",
+      "status": "Ineligible"
+    }
+  },
+  {
+    "number": "16",
+    "film": "The Good Dinosaur",
+    "release_date": "2015-11-25",
+    "run_time": "93",
+    "film_rating": "PG",
+    "plot": "In a world where dinosaurs and humans live side-by-side, an Apatosaurus named Arlo makes an unlikely human friend.",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Animation"
+    ],
+    "box_office": {
+      "film": "The Good Dinosaur",
+      "budget": "175000000",
+      "box_office_us_canada": "123087120",
+      "box_office_other": "209120551",
+      "box_office_worldwide": "332207671"
+    },
+    "academy_awards": {
+      "film": "The Good Dinosaur",
+      "award_type": "Adapted Screenplay",
+      "status": "Ineligible"
+    }
+  },
+  {
+    "number": "17",
+    "film": "Finding Dory",
+    "release_date": "2016-06-17",
+    "run_time": "97",
+    "film_rating": "PG",
+    "plot": "Friendly but forgetful blue tang Dory begins a search for her long-lost parents and everyone learns a few things about the real meaning of family along the way.",
+    "genres": [
+      "Adventure",
+      "Animation",
+      "Comedy"
+    ],
+    "box_office": {
+      "film": "Finding Dory",
+      "budget": "200000000",
+      "box_office_us_canada": "486295561",
+      "box_office_other": "542275328",
+      "box_office_worldwide": "1028570889"
+    },
+    "academy_awards": {
+      "film": "Finding Dory",
+      "award_type": "Original Screenplay",
+      "status": "Ineligible"
+    }
+  },
+  {
+    "number": "18",
+    "film": "Cars 3",
+    "release_date": "2017-06-16",
+    "run_time": "102",
+    "film_rating": "G",
+    "plot": "Lightning McQueen sets out to prove to a new generation of racers that he's still the best race car in the world.",
+    "genres": [
+      "Adventure",
+      "Animation",
+      "Comedy"
+    ],
+    "box_office": {
+      "film": "Cars 3",
+      "budget": "175000000",
+      "box_office_us_canada": "152901115",
+      "box_office_other": "231029541",
+      "box_office_worldwide": "383930656"
+    },
+    "academy_awards": {
+      "film": "Cars 3",
+      "award_type": "Original Screenplay",
+      "status": "Ineligible"
+    }
+  },
+  {
+    "number": "19",
+    "film": "Coco",
+    "release_date": "2017-11-22",
+    "run_time": "105",
+    "film_rating": "PG",
+    "plot": "Aspiring musician Miguel, confronted with his family's ancestral ban on music, enters the Land of the Dead to find his great-great-grandfather, a legendary singer.",
+    "genres": [
+      "Adventure",
+      "Animation",
+      "Drama"
+    ],
+    "box_office": {
+      "film": "Coco",
+      "budget": "175000000",
+      "box_office_us_canada": "210460015",
+      "box_office_other": "604181157",
+      "box_office_worldwide": "814641172"
+    },
+    "academy_awards": {
+      "film": "Coco",
+      "award_type": "Original Song",
+      "status": "Won"
+    }
+  },
+  {
+    "number": "20",
+    "film": "Incredibles 2",
+    "release_date": "2018-06-15",
+    "run_time": "118",
+    "film_rating": "PG",
+    "plot": "The Incredibles family takes on a new mission which involves a change in family roles: Bob Parr (Mr. Incredible) must manage the house while his wife Helen (Elastigirl) goes out to save the world.",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Animation"
+    ],
+    "box_office": {
+      "film": "Incredibles 2",
+      "budget": "200000000",
+      "box_office_us_canada": "608581744",
+      "box_office_other": "634223615",
+      "box_office_worldwide": "1242805359"
+    },
+    "academy_awards": {
+      "film": "Incredibles 2",
+      "award_type": "Original Screenplay",
+      "status": "Ineligible"
+    }
+  },
+  {
+    "number": "21",
+    "film": "Toy Story 4",
+    "release_date": "2019-06-21",
+    "run_time": "100",
+    "film_rating": "G",
+    "plot": "When a new toy called \"Forky\" joins Woody and the gang, a road trip alongside old and new friends reveals how big the world can be for a toy.",
+    "genres": [
+      "Adventure",
+      "Animation",
+      "Comedy"
+    ],
+    "box_office": {
+      "film": "Toy Story 4",
+      "budget": "200000000",
+      "box_office_us_canada": "434038008",
+      "box_office_other": "639356585",
+      "box_office_worldwide": "1073394593"
+    },
+    "academy_awards": {
+      "film": "Toy Story 4",
+      "award_type": "Original Song",
+      "status": "Nominated"
+    }
+  },
+  {
+    "number": "22",
+    "film": "Onward",
+    "release_date": "2020-03-06",
+    "run_time": "102",
+    "film_rating": "PG",
+    "plot": "Teenage elf brothers Ian and Barley embark on a magical quest to spend one more day with their late father. Like any good adventure, their journey is filled with cryptic maps, impossible obstacles and unimaginable discoveries.",
+    "genres": [
+      "Adventure",
+      "Animation",
+      "Comedy"
+    ],
+    "box_office": {
+      "film": "Onward",
+      "budget": "175000000",
+      "box_office_us_canada": "61555145",
+      "box_office_other": "80384897",
+      "box_office_worldwide": "141940042"
+    },
+    "academy_awards": {
+      "film": "Onward",
+      "award_type": "Adapted Screenplay",
+      "status": "Ineligible"
+    }
+  },
+  {
+    "number": "23",
+    "film": "Soul",
+    "release_date": "2020-12-25",
+    "run_time": "100",
+    "film_rating": "PG",
+    "plot": "Joe is a middle-school band teacher whose life hasn't quite gone the way he expected. His true passion is jazz. But when he travels to another realm to help someone find their passion, he soon discovers what it means to have soul.",
+    "genres": [
+      "Adventure",
+      "Animation",
+      "Comedy"
+    ],
+    "box_office": {
+      "film": "Soul",
+      "budget": "150000000",
+      "box_office_us_canada": "946154",
+      "box_office_other": "120957731",
+      "box_office_worldwide": "121903885"
+    },
+    "academy_awards": {
+      "film": "Soul",
+      "award_type": "Sound Mixing",
+      "status": "Nominated"
+    }
+  },
+  {
+    "number": "24",
+    "film": "Luca",
+    "release_date": "2021-06-18",
+    "run_time": "95",
+    "film_rating": "PG",
+    "plot": "On the Italian Riviera, an unlikely but strong friendship grows between a human being and a sea monster disguised as a human.",
+    "genres": [
+      "Adventure",
+      "Animation",
+      "Comedy"
+    ],
+    "box_office": {
+      "film": "Luca",
+      "budget": "NA",
+      "box_office_us_canada": "1324302",
+      "box_office_other": "49788012",
+      "box_office_worldwide": "51112314"
+    },
+    "academy_awards": {
+      "film": "Luca",
+      "award_type": "Adapted Screenplay",
+      "status": "Ineligible"
+    }
+  },
+  {
+    "number": "25",
+    "film": "Turning Red",
+    "release_date": "2022-03-11",
+    "run_time": "100",
+    "film_rating": "PG",
+    "plot": "A thirteen-year-old girl named Mei Lee is torn between staying her mother's dutiful daughter and the changes of adolescence. And as if the challenges were not enough, whenever she gets overly excited she transforms into a giant re...",
+    "genres": [
+      "Adventure",
+      "Animation",
+      "Comedy"
+    ],
+    "box_office": {
+      "film": "Turning Red",
+      "budget": "175000000",
+      "box_office_us_canada": "1399001",
+      "box_office_other": "20414357",
+      "box_office_worldwide": "21813358"
+    },
+    "academy_awards": {
+      "film": "Turning Red",
+      "award_type": "Adapted Screenplay",
+      "status": "Ineligible"
+    }
+  },
+  {
+    "number": "26",
+    "film": "Lightyear",
+    "release_date": "2022-06-17",
+    "run_time": "105",
+    "film_rating": "PG",
+    "plot": "While spending years attempting to return home, marooned Space Ranger Buzz Lightyear encounters an army of ruthless robots commanded by Zurg who are attempting to steal his fuel source.",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Animation"
+    ],
+    "box_office": {
+      "film": "Lightyear",
+      "budget": "200000000",
+      "box_office_us_canada": "118307188",
+      "box_office_other": "108118232",
+      "box_office_worldwide": "226425420"
+    },
+    "academy_awards": {
+      "film": "Lightyear",
+      "award_type": "Original Screenplay",
+      "status": "Ineligible"
+    }
+  },
+  {
+    "number": "27",
+    "film": "Elemental",
+    "release_date": "2023-06-16",
+    "run_time": "101",
+    "film_rating": "PG",
+    "plot": "Follows Ember and Wade, in a city where fire-, water-, earth- and air-residents live together.",
+    "genres": [
+      "Adventure",
+      "Animation",
+      "Comedy"
+    ],
+    "box_office": {
+      "film": "Elemental",
+      "budget": "200000000",
+      "box_office_us_canada": "154426697",
+      "box_office_other": "342017611",
+      "box_office_worldwide": "496444308"
+    },
+    "academy_awards": {
+      "film": "Elemental",
+      "award_type": "Adapted Screenplay",
+      "status": "Ineligible"
+    }
+  },
+  {
+    "number": "28",
+    "film": "Inside Out 2",
+    "release_date": "2024-06-14",
+    "run_time": "96",
+    "film_rating": "PG",
+    "plot": "A sequel that features Riley entering puberty and experiencing brand new, more complex emotions as a result. As Riley tries to adapt to her teenage years, her old emotions try to adapt to the possibility of being replaced.",
+    "genres": [
+      "Adventure",
+      "Animation",
+      "Comedy"
+    ],
+    "box_office": {
+      "film": "Inside Out 2",
+      "budget": "200000000",
+      "box_office_us_canada": "652980194",
+      "box_office_other": "1045050771",
+      "box_office_worldwide": "1698030965"
+    },
+    "academy_awards": {
+      "film": "Inside Out 2",
+      "award_type": "Animated Feature",
+      "status": "Nominated"
+    }
+  }
+]
