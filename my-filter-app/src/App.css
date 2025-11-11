@@ -101,6 +101,51 @@
   color: rgba(255, 255, 255, 0.5);
 }
 
+.filter-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.days-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.days-filter label {
+  color: rgba(255, 255, 255, 0.8);
+  white-space: nowrap;
+  font-size: 0.9rem;
+}
+
+.days-input {
+  width: 80px;
+  padding: 0.75rem 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+
+.days-input:focus {
+  outline: none;
+  border-color: #646cff;
+}
+
+.days-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.days-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
 .sort-controls {
   display: flex;
   align-items: center;
@@ -525,6 +570,28 @@
   .controls {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .filter-controls {
+    width: 100%;
+  }
+
+  .days-filter {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .days-input {
+    flex: 0 0 100px;
+  }
+
+  .sort-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .sort-controls select {
+    flex: 1;
   }
 
   .view-controls {

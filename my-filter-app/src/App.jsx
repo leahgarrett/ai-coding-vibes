@@ -6,15 +6,27 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedView, setSelectedView] = useState('timeline')
   const [sortOrder, setSortOrder] = useState('date-desc')
+  const [daysFilter, setDaysFilter] = useState('')
 
   // Process events data
   const processedEvents = useMemo(() => {
+    const today = new Date()
+    today.setHours(0, 0, 0, 0) // Reset time to start of day for accurate day calculation
+    
     return meetupData.past_events
       .map(event => {
         const date = event.datetime ? new Date(event.datetime) : null
+        let daysAgo = null
+        if (date) {
+          const eventDate = new Date(date)
+          eventDate.setHours(0, 0, 0, 0)
+          const diffTime = today - eventDate
+          daysAgo = Math.floor(diffTime / (1000 * 60 * 60 * 24))
+        }
         return {
           ...event,
           date,
+          daysAgo,
           year: date ? date.getFullYear() : null,
           month: date ? date.getMonth() : null,
           monthName: date ? date.toLocaleString('default', { month: 'short' }) : null,
@@ -22,13 +34,29 @@ function App() {
         }
       })
       .filter(event => {
-        if (!searchTerm) return true
-        const searchLower = searchTerm.toLowerCase()
-        return (
-          event.title.toLowerCase().includes(searchLower) ||
-          event.location.toLowerCase().includes(searchLower) ||
-          event.details.toLowerCase().includes(searchLower)
-        )
+        // Search filter
+        if (searchTerm) {
+          const searchLower = searchTerm.toLowerCase()
+          const matchesSearch = (
+            event.title.toLowerCase().includes(searchLower) ||
+            event.location.toLowerCase().includes(searchLower) ||
+            event.details.toLowerCase().includes(searchLower)
+          )
+          if (!matchesSearch) return false
+        }
+        
+        // Days filter
+        if (daysFilter !== '' && daysFilter !== null) {
+          const daysValue = parseInt(daysFilter, 10)
+          if (!isNaN(daysValue) && daysValue >= 0) {
+            // Filter events that occurred more than the specified number of days ago
+            if (event.daysAgo === null || event.daysAgo <= daysValue) {
+              return false
+            }
+          }
+        }
+        
+        return true
       })
       .sort((a, b) => {
         if (sortOrder === 'date-desc') {
@@ -46,7 +74,7 @@ function App() {
         }
         return 0
       })
-  }, [searchTerm, sortOrder])
+  }, [searchTerm, sortOrder, daysFilter])
 
   // Calculate statistics
   const stats = useMemo(() => {
@@ -242,6 +270,40 @@ function App() {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="search-input"
           />
+        </div>
+        <div className="filter-controls">
+          <div className="days-filter">
+            <label htmlFor="days-filter">Greater than:</label>
+            <input
+              id="days-filter"
+              type="number"
+              min="0"
+              step="1"
+              placeholder="Days"
+              value={daysFilter}
+              onChange={(e) => {
+                const value = e.target.value
+                // Allow empty string or non-negative integers
+                if (value === '') {
+                  setDaysFilter('')
+                } else {
+                  const numValue = parseInt(value, 10)
+                  if (!isNaN(numValue) && numValue >= 0) {
+                    setDaysFilter(value)
+                  }
+                }
+              }}
+              onBlur={(e) => {
+                // Clean up on blur - remove invalid values
+                const value = e.target.value
+                if (value !== '' && (isNaN(parseInt(value, 10)) || parseInt(value, 10) < 0)) {
+                  setDaysFilter('')
+                }
+              }}
+              className="days-input"
+            />
+            <span className="days-label">days ago</span>
+          </div>
         </div>
         <div className="sort-controls">
           <label>Sort by:</label>
