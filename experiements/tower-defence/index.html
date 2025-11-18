@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tower Defense</title>
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<header>
+  <h1>Tower Defense</h1>
+  <div id="controls">
+    <button id="startWaveBtn">Start Next Wave</button>
+    <span id="goldDisplay">Gold: 0</span>
+    <span id="waveDisplay">Wave: 0</span>
+    <span id="statusDisplay"></span>
+    <span id="livesDisplay">Lives: 0</span>
+    <label style="display:flex;align-items:center;gap:.25rem;font-size:.75rem;">
+      <input type="checkbox" id="debugToggle"> Debug
+    </label>
+    <select id="difficultySelect" aria-label="Difficulty">
+      <option value="easy">Easy</option>
+      <option value="normal" selected>Normal</option>
+      <option value="hard">Hard</option>
+    </select>
+  </div>
+</header>
+<main>
+  <canvas id="gameCanvas" width="640" height="480" tabindex="0" aria-label="Game board"></canvas>
+  <aside id="towerPanel">
+    <h2>Towers</h2>
+    <button class="tower-btn" data-tower="basic">Place Basic (80)</button>
+    <button class="tower-btn" data-tower="sniper">Place Sniper (140)</button>
+  </aside>
+</main>
+<footer>
+  <small>Easy mode demo.</small>
+</footer>
+<script type="module" src="./js/main.js"></script>
+</body>
+</html>

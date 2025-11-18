@@ -1,0 +1,45 @@
+:root {
+  --bg:#111;
+  --panel:#1e1e1e;
+  --accent:#2ecc71;
+  --danger:#e74c3c;
+  --text:#eee;
+  --tile-size:32px;
+  --font-stack:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  font-family:var(--font-stack);
+  background:var(--bg);
+  color:var(--text);
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+}
+header, footer { padding:.5rem 1rem; background:#000; }
+#controls { display:flex; gap:1rem; align-items:center; font-size:.9rem; }
+main { display:flex; padding:1rem; gap:1rem; flex:1; }
+#gameCanvas { background:#222; outline:none; border:2px solid #333; image-rendering:pixelated; }
+#towerPanel {
+  width:180px;
+  background:var(--panel);
+  padding:.75rem;
+  border:1px solid #333;
+  display:flex;
+  flex-direction:column;
+  gap:.5rem;
+}
+.tower-btn {
+  background:var(--accent);
+  color:#000;
+  border:none;
+  padding:.5rem;
+  cursor:pointer;
+  font-weight:600;
+}
+.tower-btn:focus, #startWaveBtn:focus { outline:2px solid #fff; }
+#startWaveBtn { background:#3498db; color:#000; padding:.5rem .75rem; border:none; cursor:pointer; }
+#statusDisplay { min-width:120px; }
+.success { color:var(--accent); }
+.fail { color:var(--danger); }
